@@ -11,7 +11,7 @@ namespace DentalManagementSystem.Domain.Entities.Common
         public Guid Id { get; set; }
         public DateTime DateCreated { get; set; }
         public Guid? CreatedBy { get; set; }
-        public DateTime? LastModified { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
         public Guid? LastModifiedBy { get; set; }
     }
 }
