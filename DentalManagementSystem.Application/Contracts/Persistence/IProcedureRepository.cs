@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace DentalManagementSystem.Application.Contracts.Persistence
 {
-    public interface IPatientRepository : IBaseRepository<Patient>
+    public interface IProcedureRepository : IBaseRepository<Procedure>
     {
-        
+        Task ChangeProcedureStatus(Guid procedureId);
     }
 }
