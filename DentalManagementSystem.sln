@@ -13,16 +13,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalManagementSystem.Domain", "DentalManagementSystem.Domain\DentalManagementSystem.Domain.csproj", "{8E10168E-86A4-4386-B598-D60E3E902E48}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
-	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
-		docker-compose.yml = docker-compose.yml
-		Dockerfile = Dockerfile
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalManagementSystem.Persistence", "DentalManagementSystem.Persistence\DentalManagementSystem.Persistence.csproj", "{2B8D4F65-A078-42EE-BA27-C0681E01673B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalManagementSystem.Application", "DentalManagementSystem.Application\DentalManagementSystem.Application.csproj", "{724CED23-45D1-486E-8BEA-A46361AB8853}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalManagementSystem.API", "DentalManagementSystem.API\DentalManagementSystem.API.csproj", "{F0DA5782-2F8D-42C4-A3E5-29EDA1F1F646}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,6 +37,10 @@ Global
 		{724CED23-45D1-486E-8BEA-A46361AB8853}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{724CED23-45D1-486E-8BEA-A46361AB8853}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{724CED23-45D1-486E-8BEA-A46361AB8853}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0DA5782-2F8D-42C4-A3E5-29EDA1F1F646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0DA5782-2F8D-42C4-A3E5-29EDA1F1F646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0DA5782-2F8D-42C4-A3E5-29EDA1F1F646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0DA5782-2F8D-42C4-A3E5-29EDA1F1F646}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +52,7 @@ Global
 		{8E10168E-86A4-4386-B598-D60E3E902E48} = {8255EA69-ABB4-44D0-89FF-E62E79BA334B}
 		{2B8D4F65-A078-42EE-BA27-C0681E01673B} = {FB39C93E-ABA8-439C-9D82-0D7AD5183584}
 		{724CED23-45D1-486E-8BEA-A46361AB8853} = {8255EA69-ABB4-44D0-89FF-E62E79BA334B}
+		{F0DA5782-2F8D-42C4-A3E5-29EDA1F1F646} = {BD5D8132-B0E7-45D8-A042-C24CBBB8BE32}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {215CB0A8-4425-4866-BE6D-FD3D46449923}
