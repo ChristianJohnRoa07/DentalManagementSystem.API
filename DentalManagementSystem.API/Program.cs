@@ -1,4 +1,6 @@
 using DentalManagementSystem.Persistence;
+using DentalManagementSystem.Persistence.DatabaseContext;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,5 +27,31 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Automatically apply migrations on startup
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    try
+    {
+        var context = services.GetRequiredService<DentalManagementSystemDbContext>();
+        if (context.Database.GetPendingMigrations().Any())
+        {
+            context.Database.Migrate();
+        }
+
+        //var identityDbContext = services.GetRequiredService<IdentityDbContext>();
+        //if (identityDbContext.Database.GetPendingMigrations().Any())
+        //{
+        //    identityDbContext.Database.Migrate(); // This creates your security tables automatically!
+        //}
+    }
+    catch (Exception ex)
+    {
+        var logger = services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred while migrating the database.");
+    }
+}
 
 app.Run();
