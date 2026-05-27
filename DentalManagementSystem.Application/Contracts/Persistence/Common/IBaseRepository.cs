@@ -19,6 +19,5 @@ namespace DentalManagementSystem.Application.Contracts.Persistence.Common
 
         Task<T> Delete(T entity);
 
-        Task<T> SetToInactive(T entity);
     }
 }

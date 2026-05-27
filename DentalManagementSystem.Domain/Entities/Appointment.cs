@@ -9,12 +9,12 @@ namespace DentalManagementSystem.Domain.Entities
 {
     public class Appointment : BaseDomainEntity
     {
-        public Guid PatientId { get; set; }
-        public Guid ProcedureId { get; set; }
+        public Patient Patient { get; set; }
+        public Procedure Procedure { get; set; }
         public DateTime AppointmentDateTime { get; set; }
         public string? AppointmentStatus { get; set; }
         public float Amount { get; set; }
-        public Guid AmountReceivedBy { get; set; }
+        public Guid AmountReceivedBy { get; set; } // User instead of GUID
         public DateTime AmountReceivedDateTime { get; set; }
     }
 }
