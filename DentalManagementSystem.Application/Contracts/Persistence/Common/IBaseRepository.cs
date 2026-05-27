@@ -11,13 +11,13 @@ namespace DentalManagementSystem.Application.Contracts.Persistence.Common
     {
         Task<T> GetById(Guid Id);
 
-        Task<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
 
         Task<T> Create(T entity);
 
-        Task<T> Update(T entity);
+        Task Update(T entity);
 
-        Task<T> Delete(T entity);
+        Task Delete(T entity);
 
     }
 }
