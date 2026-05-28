@@ -73,10 +73,8 @@ namespace DentalManagementSystem.Identity.Services
             return response;
         }
 
-        public async Task<LogoutResponse> Logout(LogoutRequest request)
+        public async Task<LogoutResponse> Logout(string token)
         {
-
-            var token = request.Token;
 
             if (string.IsNullOrWhiteSpace(token))
             {
@@ -87,10 +85,10 @@ namespace DentalManagementSystem.Identity.Services
             {
                 await _signInManager.SignOutAsync();
 
-                var jwtToken = JwtUtility.VerifyAndReadToken(request.Token);
+                var jwtToken = JwtUtility.VerifyAndReadToken(token);
                 var expiryDate = jwtToken.ValidTo;
 
-                JwtUtility.BlacklistToken(request.Token, expiryDate, _userDbContext);
+                JwtUtility.BlacklistToken(token, expiryDate, _userDbContext);
 
                 return new LogoutResponse
                 {
@@ -120,11 +118,19 @@ namespace DentalManagementSystem.Identity.Services
                 LastName = request.LastName
             };
 
+            var role = await _roleManager.FindByIdAsync(request.RoleId);
+
+            if (role == null)
+            {
+                throw NotFoundException.Role(request.RoleId);
+            }
+
             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, request.Role);
+                await _userManager.AddToRoleAsync(user, role.Name);
+
                 return new RegisterResponse()
                 {
                     CreationStatus = true,

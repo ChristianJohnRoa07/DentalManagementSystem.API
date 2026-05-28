@@ -11,6 +11,6 @@ namespace DentalManagementSystem.Application.Contracts.Identity
     {
         Task<AuthResponse> Login(AuthRequest request);
         Task<RegisterResponse> Register(RegisterRequest request);
-        Task<LogoutResponse> Logout(LogoutRequest request);
+        Task<LogoutResponse> Logout(string token);
     }
 }

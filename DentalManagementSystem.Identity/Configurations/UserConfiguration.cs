@@ -22,7 +22,7 @@ namespace DentalManagementSystem.Identity.Configurations
                     FirstName = "System",
                     LastName = "Admin",
                     UserName = "admin",
-                    NormalizedUserName = "ADMIN@LOCALHOST.COM",
+                    NormalizedUserName = "ADMIN",
                     PasswordHash = "AQAAAAIAAYagAAAAEJa6+guO7sX0smJaX+9AZRZ4X28hUtrR3E0dZU8tUXTrwChsY6E40wL1EgYSDoK19Q==", //P@ssw0rd!
                     EmailConfirmed = true,
                     SecurityStamp = string.Empty,
@@ -31,12 +31,12 @@ namespace DentalManagementSystem.Identity.Configurations
                 new ApplicationUser
                 {
                     Id = "9e224968-33e4-4652-b7b7-8574d048cdb9",
-                    Email = "employee@localhost.com",
-                    NormalizedEmail = "STAFF@LOCALHOST.COM",
+                    Email = "staff1@localhost.com",
+                    NormalizedEmail = "STAFF1@LOCALHOST.COM",
                     FirstName = "System",
-                    LastName = "Staff",
+                    LastName = "Staff1",
                     UserName = "staff1",
-                    NormalizedUserName = "STAFF@LOCALHOST.COM",
+                    NormalizedUserName = "STAFF1",
                     PasswordHash = "AQAAAAIAAYagAAAAEJa6+guO7sX0smJaX+9AZRZ4X28hUtrR3E0dZU8tUXTrwChsY6E40wL1EgYSDoK19Q==", //P@ssw0rd!
                     EmailConfirmed = true,
                     SecurityStamp = string.Empty,

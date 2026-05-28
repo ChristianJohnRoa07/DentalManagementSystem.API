@@ -31,9 +31,9 @@ GO
 
 Application Migration command
 ```bash
-Add-Migration initialApplicationMigration -Project DentalManagementSystem.Persistence -StartupProject DentalManagementSystem.API
+Add-Migration initialApplicationMigration -Project DentalManagementSystem.Persistence -StartupProject DentalManagementSystem.API -Context DentalManagementSystemDbContext
 ```
 Identity Migration command
 ```bash
-Add-Migration initialIdentityMigration -Project DentalManagementSystem.Identity -StartupProject DentalManagementSystem.API
+Add-Migration initialIdentityMigration -Project DentalManagementSystem.Identity -StartupProject DentalManagementSystem.API -Context ApplicationUserDbContext
 ```

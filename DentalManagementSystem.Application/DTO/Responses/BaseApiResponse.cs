@@ -12,9 +12,9 @@ namespace DentalManagementSystem.Application.DTO.Responses
         public T? Data { get; }
         public string? ErrorMessage { get; set; }
 
-        public BaseApiResponse(bool success, T? data) 
+        public BaseApiResponse(T? data) 
         { 
-            Success = success;
+            Success = true;
             Data = data;
         }
 
