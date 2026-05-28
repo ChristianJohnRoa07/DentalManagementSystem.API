@@ -6,14 +6,28 @@ To interact with the SQL Server database directly via the command line, first co
 
 ```bash
 docker exec -it dental_sql_server /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "DentalApp#2026!" -C
-Note: The password is wrapped in quotes to ensure special characters like # and ! are processed correctly by the terminal.
+Note: The password is wrapped in quotes to ensure special characters are processed correctly by the terminal.
 
-2. Querying the Databases
+## 2. Querying the Databases
+
 Once you are connected to the SQL Server interface, you can immediately switch databases and query them. Always make sure to execute the USE command so you know which database you are currently targeting.
 
 View Tables in the Application Database
+
+```bash
 SQL
 USE DentalManagementSystem_Application_db;
 SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';
 GO
+
+USE DentalManagementSystem_Identity_db;
+SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';
+GO
+
+## 3. Migration Scripts
+
+```bash
+Add-Migration initialApplicationMigration -Project DentalManagementSystem.Persistence -StartupProject DentalManagementSystem.API
+
+Add-Migration initialIdentityMigration -Project DentalManagementSystem.Identity -StartupProject DentalManagementSystem.API
 
