@@ -11,14 +11,11 @@ namespace DentalManagementSystem.Application.DTO.Identity
     {
         [Required]
         public string FirstName { get; set; }
-        [Required]
-        public string MiddleName { get; set; }
 
         [Required]
         public string LastName { get; set; }
 
         [Required]
-        [EmailAddress]
         public string Email { get; set; }
 
         [Required]
@@ -28,6 +25,6 @@ namespace DentalManagementSystem.Application.DTO.Identity
         public string Password { get; set; }
 
         [Required]
-        public string Role { get; set; }
+        public string RoleId { get; set; }
     }
 }
