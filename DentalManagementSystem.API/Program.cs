@@ -1,12 +1,15 @@
+using DentalManagementSystem.Identity;
+using DentalManagementSystem.Identity.DbContext;
 using DentalManagementSystem.Persistence;
 using DentalManagementSystem.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.ConfigurePersistenceServices(builder.Configuration);
-
+builder.Services.ConfigureIdentityServices(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -32,25 +35,23 @@ app.MapControllers();
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
+    var logger = services.GetRequiredService<ILogger<Program>>();
 
     try
     {
+        logger.LogInformation("Applying Dental Management System migrations...");
         var context = services.GetRequiredService<DentalManagementSystemDbContext>();
-        if (context.Database.GetPendingMigrations().Any())
-        {
-            context.Database.Migrate();
-        }
+        await context.Database.MigrateAsync();
 
-        //var identityDbContext = services.GetRequiredService<IdentityDbContext>();
-        //if (identityDbContext.Database.GetPendingMigrations().Any())
-        //{
-        //    identityDbContext.Database.Migrate(); // This creates your security tables automatically!
-        //}
+        logger.LogInformation("Applying Identity Security database migrations...");
+        var identityDbContext = services.GetRequiredService<ApplicationUserDbContext>();
+        await identityDbContext.Database.MigrateAsync();
+
+        logger.LogInformation("Database initial migration routines completed successfully.");
     }
     catch (Exception ex)
     {
-        var logger = services.GetRequiredService<ILogger<Program>>();
-        logger.LogError(ex, "An error occurred while migrating the database.");
+        logger.LogCritical(ex, "An execution failure occurred while applying target database migrations.");
     }
 }
 
