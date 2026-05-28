@@ -16,3 +16,8 @@ DentalManagementSystem_Identity_db
     SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';
     GO
 
+
+# Create migration script
+Add-Migration InitialApplicationCreate -Project DentalManagementSystem.Identity -StartupProject DentalManagementSystem.API -Context DentalManagementSystemDbContext
+Add-Migration InitialIdentityCreate -Project DentalManagementSystem.Identity -StartupProject DentalManagementSystem.API -Context ApplicationUserDbContext
+
