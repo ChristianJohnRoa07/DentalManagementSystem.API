@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DentalManagementSystem.Application.Features.Appointment.Queries.GetAllAppointments
+namespace DentalManagementSystem.Application.Features.Appointments.Queries.GetAllAppointments
 {
     public class GetAllAppointmentsHandler : IRequestHandler<GetAllAppointmentsCommand, List<AppointmentDTO>>
     {
