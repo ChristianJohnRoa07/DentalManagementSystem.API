@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalManagementSystem.API"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{81DDED9D-158B-E303-5F62-77A2896D2A5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DentalManagementSystem.Identity", "DentalManagementSystem.Identity\DentalManagementSystem.Identity.csproj", "{03345A06-33CC-4A99-9E85-B30951B78E6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{81DDED9D-158B-E303-5F62-77A2896D2A5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03345A06-33CC-4A99-9E85-B30951B78E6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03345A06-33CC-4A99-9E85-B30951B78E6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03345A06-33CC-4A99-9E85-B30951B78E6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03345A06-33CC-4A99-9E85-B30951B78E6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -59,6 +65,7 @@ Global
 		{2B8D4F65-A078-42EE-BA27-C0681E01673B} = {FB39C93E-ABA8-439C-9D82-0D7AD5183584}
 		{724CED23-45D1-486E-8BEA-A46361AB8853} = {8255EA69-ABB4-44D0-89FF-E62E79BA334B}
 		{F0DA5782-2F8D-42C4-A3E5-29EDA1F1F646} = {BD5D8132-B0E7-45D8-A042-C24CBBB8BE32}
+		{03345A06-33CC-4A99-9E85-B30951B78E6B} = {FB39C93E-ABA8-439C-9D82-0D7AD5183584}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {215CB0A8-4425-4866-BE6D-FD3D46449923}

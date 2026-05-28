@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DentalManagementSystem.Application\DentalManagementSystem.Application.csproj" />
+    <ProjectReference Include="..\DentalManagementSystem.Identity\DentalManagementSystem.Identity.csproj" />
     <ProjectReference Include="..\DentalManagementSystem.Persistence\DentalManagementSystem.Persistence.csproj" />
   </ItemGroup>
 
