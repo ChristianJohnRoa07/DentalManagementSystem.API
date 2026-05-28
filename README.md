@@ -5,7 +5,9 @@
 To interact with the SQL Server database directly via the command line, first connect to the running container and launch the `sqlcmd` utility:
 
 ```bash
-docker exec -it dental_sql_server /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "DentalApp#2026!" -C
+docker exec -it dental_sql_server /opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P "DentalApp#2026!" -C 
+```
+
 Note: The password is wrapped in quotes to ensure special characters are processed correctly by the terminal.
 
 ## 2. Querying the Databases
@@ -23,11 +25,15 @@ GO
 USE DentalManagementSystem_Identity_db;
 SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE';
 GO
+```
 
 ## 3. Migration Scripts
 
+Application Migration command
 ```bash
 Add-Migration initialApplicationMigration -Project DentalManagementSystem.Persistence -StartupProject DentalManagementSystem.API
-
+```
+Identity Migration command
+```bash
 Add-Migration initialIdentityMigration -Project DentalManagementSystem.Identity -StartupProject DentalManagementSystem.API
-
+```
