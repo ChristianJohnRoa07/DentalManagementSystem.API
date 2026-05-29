@@ -20,7 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Persistence\" />
+    <Folder Include="Controllers\Persistence\Appointments\" />
+    <Folder Include="Controllers\Persistence\Patients\" />
   </ItemGroup>
 
   <ItemGroup>
