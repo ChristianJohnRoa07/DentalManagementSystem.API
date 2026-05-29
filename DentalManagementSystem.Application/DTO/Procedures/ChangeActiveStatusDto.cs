@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DentalManagementSystem.Application.DTO.Procedure
+namespace DentalManagementSystem.Application.DTO.Procedures
 {
     public class ChangeActiveStatusDto
     {

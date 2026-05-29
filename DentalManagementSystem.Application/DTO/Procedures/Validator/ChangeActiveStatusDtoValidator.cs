@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DentalManagementSystem.Application.DTO.Procedure.Validator
+namespace DentalManagementSystem.Application.DTO.Procedures.Validator
 {
-    public class CreateProcedureValidator : AbstractValidator<CreateProcedureDto>
+    public class ChangeActiveStatusDtoValidator : AbstractValidator<ChangeActiveStatusDto>
     {
-        public CreateProcedureValidator() 
+        public ChangeActiveStatusDtoValidator()
         {
-            RuleFor(p => p.Name)
+            RuleFor(p => p.procedureId)
                .NotEmpty().WithMessage("{PropertyName} is required.")
                .NotNull();
         }
