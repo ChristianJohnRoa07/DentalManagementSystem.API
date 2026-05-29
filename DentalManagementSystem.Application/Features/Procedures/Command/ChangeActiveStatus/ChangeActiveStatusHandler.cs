@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DentalManagementSystem.Application.Contracts.Persistence;
-using DentalManagementSystem.Application.DTO.Procedure.Validator;
+using DentalManagementSystem.Application.DTO.Procedures.Validator;
 using DentalManagementSystem.Application.DTO.Responses;
 using DentalManagementSystem.Application.Exceptions;
 using FluentValidation;
