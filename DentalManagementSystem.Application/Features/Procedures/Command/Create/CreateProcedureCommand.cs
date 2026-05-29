@@ -1,4 +1,4 @@
-﻿using DentalManagementSystem.Application.DTO.Procedure;
+﻿using DentalManagementSystem.Application.DTO.Procedures;
 using DentalManagementSystem.Application.DTO.Responses;
 using MediatR;
 using System;

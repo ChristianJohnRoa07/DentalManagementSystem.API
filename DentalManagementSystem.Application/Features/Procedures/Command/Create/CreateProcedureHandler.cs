@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DentalManagementSystem.Domain.Entities;
 using DentalManagementSystem.Application.Contracts.Persistence;
-using DentalManagementSystem.Application.DTO.Procedure.Validator;
+using DentalManagementSystem.Application.DTO.Procedures.Validator;
 using DentalManagementSystem.Application.DTO.Responses;
 using DentalManagementSystem.Application.Exceptions;
 
@@ -41,11 +41,11 @@ namespace DentalManagementSystem.Application.Features.Procedures.Command.Create
 
             newProcedure.IsActive = true;
 
-            newProcedure = await _procedureRepository.Create(newProcedure);
+            var createdProcedure = await _procedureRepository.Create(newProcedure);
 
             response.Success = true;
-            response.Id = newProcedure.Id;
-            response.Message = "Leave Type created successfully.";
+            response.Id = createdProcedure.Id;
+            response.Message = $"{createdProcedure.Name} procedure created successfully.";
 
             return response;
 
