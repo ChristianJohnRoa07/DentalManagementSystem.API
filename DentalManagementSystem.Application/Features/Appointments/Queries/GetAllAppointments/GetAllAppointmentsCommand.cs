@@ -1,4 +1,4 @@
-﻿using DentalManagementSystem.Application.DTO.Appointment;
+﻿using DentalManagementSystem.Application.DTO.Appointments;
 using DentalManagementSystem.Application.DTO.Responses;
 using MediatR;
 using System;

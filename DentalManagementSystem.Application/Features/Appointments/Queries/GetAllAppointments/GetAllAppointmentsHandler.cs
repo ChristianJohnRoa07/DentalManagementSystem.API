@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DentalManagementSystem.Application.Contracts.Persistence;
-using DentalManagementSystem.Application.DTO.Appointment;
+using DentalManagementSystem.Application.DTO.Appointments;
 using DentalManagementSystem.Application.DTO.Responses;
 using DentalManagementSystem.Application.Exceptions;
 using MediatR;
