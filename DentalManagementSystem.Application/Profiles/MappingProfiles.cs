@@ -16,6 +16,8 @@ namespace DentalManagementSystem.Application.Profiles
             CreateMap<Procedure, ProcedureDto>();
 
             CreateMap<CreateProcedureDto, Procedure>().ReverseMap();
+
+            CreateMap<UpdateProcedureDto, Procedure>().ReverseMap();
         }
     }
 }
