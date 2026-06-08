@@ -12,11 +12,6 @@ namespace DentalManagementSystem.Application.Exceptions
 
         public BadRequestException(string message) : base(message) {}
 
-        public BadRequestException(string message, List<string> validationErrors) : base(message)
-        {
-            ValidationErrors = validationErrors;
-        }
-
         public static BadRequestException InvalidPassword(string? username = null)
               => new BadRequestException($"Invalid password for user '{(string.IsNullOrWhiteSpace(username) ? "undefined" : username)}'.");
 
