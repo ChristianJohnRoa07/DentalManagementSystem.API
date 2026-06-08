@@ -8,7 +8,6 @@ namespace DentalManagementSystem.Application.DTO.Identity
 {
     public class LogoutResponse
     {
-        public bool LogoutStatus { get; set; }
         public string Message { get; set; }
     }
 }
