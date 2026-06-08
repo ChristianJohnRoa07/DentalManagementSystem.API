@@ -34,7 +34,7 @@ namespace DentalManagementSystem.Application.Features.Procedures.Command.Create
 
             if (!validatorResult.IsValid)
             {
-                throw new BadRequestException("Validation failed", validatorResult.Errors.Select(q => q.ErrorMessage).ToList());
+                throw new ValidationException(validatorResult);
             }
 
             var newProcedure = _mapper.Map<Procedure>(createProcedureRequest);
@@ -43,7 +43,6 @@ namespace DentalManagementSystem.Application.Features.Procedures.Command.Create
 
             var createdProcedure = await _procedureRepository.Create(newProcedure);
 
-            response.Success = true;
             response.Id = createdProcedure.Id;
             response.Message = $"{createdProcedure.Name} procedure created successfully.";
 

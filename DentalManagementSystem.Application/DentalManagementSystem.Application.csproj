@@ -22,7 +22,6 @@
     <Folder Include="Features\Appointments\Queries\GetAppointmentByDate\" />
     <Folder Include="Features\Patients\" />
     <Folder Include="Features\Procedures\Command\Delete\" />
-    <Folder Include="Features\Procedures\Command\Update\" />
     <Folder Include="Features\Procedures\Queries\" />
   </ItemGroup>
 

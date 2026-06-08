@@ -27,12 +27,7 @@ namespace DentalManagementSystem.API.Controllers.Persistence.Procedures
 
             var response = await _mediator.Send(command);
 
-            var result = new BaseApiResponse<BaseCommandResponse>(response);
-
-            if (!response.Success)
-            {
-                return BadRequest(result);
-            }
+            var result = new BaseApiResponse<BaseCommandResponse>(response, StatusCodes.Status201Created);
 
             return Ok(result);
         }
@@ -44,12 +39,7 @@ namespace DentalManagementSystem.API.Controllers.Persistence.Procedures
 
             var response = await _mediator.Send(command);
 
-            var result = new BaseApiResponse<BaseCommandResponse>(response);
-
-            if (!response.Success)
-            {
-                return BadRequest(result);
-            }
+            var result = new BaseApiResponse<BaseCommandResponse>(response, StatusCodes.Status201Created);
 
             return Ok(result);
         }

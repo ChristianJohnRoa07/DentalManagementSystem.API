@@ -3,7 +3,6 @@ using DentalManagementSystem.Application.Contracts.Persistence;
 using DentalManagementSystem.Application.DTO.Procedures.Validator;
 using DentalManagementSystem.Application.DTO.Responses;
 using DentalManagementSystem.Application.Exceptions;
-using FluentValidation;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -32,14 +31,20 @@ namespace DentalManagementSystem.Application.Features.Procedures.Command.ChangeA
 
             if (!validatorResult.IsValid)
             {
-                throw new BadRequestException("Validation failed", validatorResult.Errors.Select(q => q.ErrorMessage).ToList());
+                throw new ValidationException(validatorResult);
             }
 
             var procedureId = request.changeActiveStatusDto.procedureId;
-            await _procedureRepository.ChangeProcedureStatus(procedureId);
+            var procedure = await _procedureRepository.GetById(procedureId);
 
-            response.Success = true;
-            response.Id = procedureId;
+            if (procedure == null) 
+            {
+                throw new NotFoundException($"Procedure with ID {procedureId} was not found.");
+            }
+
+            await _procedureRepository.ChangeProcedureStatus(procedure.Id);
+
+            response.Id = procedure.Id;
             response.Message = "Procedure status updated successfully.";
 
             return response;
