@@ -21,6 +21,15 @@ namespace DentalManagementSystem.Identity.DbContext
         {
             base.OnModelCreating(builder);
             builder.ApplyConfigurationsFromAssembly(typeof(ApplicationUserDbContext).Assembly);
+
+            builder.Entity<ApplicationUser>(entity =>
+            {
+                entity.Property(u => u.FirstName)
+                      .IsRequired();
+
+                entity.Property(u => u.LastName)
+                      .IsRequired();
+            });
         }
     }
 }
