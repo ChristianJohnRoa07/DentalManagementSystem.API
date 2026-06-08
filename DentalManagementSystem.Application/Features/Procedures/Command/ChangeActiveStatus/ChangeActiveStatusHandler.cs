@@ -39,7 +39,7 @@ namespace DentalManagementSystem.Application.Features.Procedures.Command.ChangeA
 
             if (procedure == null) 
             {
-                throw new NotFoundException($"Procedure with ID {procedureId} was not found.");
+                throw NotFoundException.ProcedureNotFound(procedureId);
             }
 
             await _procedureRepository.ChangeProcedureStatus(procedure.Id);
