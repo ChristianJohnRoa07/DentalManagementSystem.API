@@ -45,8 +45,8 @@ namespace DentalManagementSystem.API.Controllers.Persistence.Procedures
             return Ok(result);
         }
 
-        [HttpPost("ChangeApprovalStatus")]
-        public async Task<IActionResult> ChangeApprovalStatus([FromBody] ChangeActiveStatusDto changeApprovalStatusDto)
+        [HttpPost("ChangeProcedureStatus")]
+        public async Task<IActionResult> ChangeProcedureStatus([FromBody] ChangeActiveStatusDto changeApprovalStatusDto)
         {
             var command = new ChangeActiveStatusCommand { changeActiveStatusDto = changeApprovalStatusDto };
 
