@@ -43,7 +43,7 @@ namespace DentalManagementSystem.API.Middlewares
                 NotFoundException => (HttpStatusCode.NotFound, null, exception.Message),
                 UnauthorizeException => (HttpStatusCode.Unauthorized, null, exception.Message),
 
-                _ => (HttpStatusCode.InternalServerError, null, "An unexpected error occurred. Please contact support.")
+                _ => (HttpStatusCode.InternalServerError, null, $"An unexpected error occurred. {exception}")
             };
 
             await WriteErrorResponse(context, statusCode, displayMessage, errors);

@@ -20,7 +20,8 @@
     <Folder Include="Features\Appointments\Queries\GetAppointmentByPatient\" />
     <Folder Include="Features\Appointments\Queries\GetAppointmentByProcedure\" />
     <Folder Include="Features\Appointments\Queries\GetAppointmentByDate\" />
-    <Folder Include="Features\Patients\" />
+    <Folder Include="Features\Patients\Queries\GetPatients\" />
+    <Folder Include="Features\Patients\Queries\GetPatientById\" />
     <Folder Include="Features\Procedures\Command\Delete\" />
   </ItemGroup>
 
