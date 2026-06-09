@@ -17,6 +17,7 @@ namespace DentalManagementSystem.Persistence.DatabaseContext
 
         public DbSet<Appointment> Appointments { get; set; }
         public DbSet<Patient> Patients { get; set; }
+        public DbSet<PatientImage> PatientImages { get; set; }
         public DbSet<Procedure> Procedures { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

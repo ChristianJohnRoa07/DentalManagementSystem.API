@@ -13,5 +13,6 @@ namespace DentalManagementSystem.Domain.Entities
         public string LastName { get; set; }
         public string Email { get; set; }
         public string MobileNumber { get; set; }
+        public virtual ICollection<PatientImage> Images { get; set; } = new List<PatientImage>();
     }
 }
