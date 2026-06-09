@@ -20,11 +20,10 @@ namespace DentalManagementSystem.API.Controllers.Identity
         public async Task<ActionResult<AuthResponse>> Login(AuthRequest request)
         {
             var response = await _authService.Login(request);
+            
+            var result = new BaseApiResponse<AuthResponse>(response, StatusCodes.Status201Created);
 
-            
-            var result = new BaseApiResponse<AuthResponse>(response);
             return Ok(result);
-            
         }
 
         [HttpPost("logout")]
@@ -33,14 +32,9 @@ namespace DentalManagementSystem.API.Controllers.Identity
             var authHeader = Request.Headers["Authorization"].ToString();
             var token = authHeader.Replace("Bearer ", "");
 
-            if (string.IsNullOrEmpty(token))
-            {
-                return BadRequest(new BaseApiResponse<string>("Token is missing") { Success = false });
-            }
-
             var response = await _authService.Logout(token);
 
-            var result = new BaseApiResponse<LogoutResponse>(response);
+            var result = new BaseApiResponse<LogoutResponse>(response, StatusCodes.Status201Created);
 
             return Ok(result);
         }
@@ -50,7 +44,7 @@ namespace DentalManagementSystem.API.Controllers.Identity
         {
             var response = await _authService.Register(request);
 
-            var result = new BaseApiResponse<RegisterResponse>(response);
+            var result = new BaseApiResponse<RegisterResponse>(response, StatusCodes.Status201Created);
 
             if (!response.CreationStatus)
             {

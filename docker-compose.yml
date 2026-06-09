@@ -10,6 +10,8 @@ services:
       - MSSQL_SA_PASSWORD=DentalApp#2026!  
     ports:
         - "1433:1433"
+    volumes:
+        - dentalmanagementsystem_data:/var/opt/mssql 
     networks:
       - dental-network
     healthcheck:
@@ -36,6 +38,10 @@ services:
     depends_on:
       dentalmanagementsystem.db:
         condition: service_healthy
+
+volumes:
+  dentalmanagementsystem_data:
+    driver: local
 
 networks:
   dental-network:

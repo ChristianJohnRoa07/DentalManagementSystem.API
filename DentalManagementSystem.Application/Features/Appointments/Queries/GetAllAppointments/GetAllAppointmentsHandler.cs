@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DentalManagementSystem.Application.Contracts.Persistence;
-using DentalManagementSystem.Application.DTO.Appointment;
+using DentalManagementSystem.Application.DTO.Appointments;
 using DentalManagementSystem.Application.DTO.Responses;
 using DentalManagementSystem.Application.Exceptions;
 using MediatR;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DentalManagementSystem.Application.Features.Appointment.Queries.GetAllAppointments
+namespace DentalManagementSystem.Application.Features.Appointments.Queries.GetAllAppointments
 {
     public class GetAllAppointmentsHandler : IRequestHandler<GetAllAppointmentsCommand, List<AppointmentDTO>>
     {

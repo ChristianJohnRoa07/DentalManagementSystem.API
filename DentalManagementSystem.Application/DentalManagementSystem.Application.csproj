@@ -11,21 +11,23 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Features\Appointment\Queries\GetAppointmentById\" />
-    <Folder Include="Features\Appointment\Command\Create\" />
-    <Folder Include="Features\Appointment\Command\Delete\" />
-    <Folder Include="Features\Appointment\Command\" />
-    <Folder Include="Features\Appointment\Command\SoftDelete\" />
-    <Folder Include="Features\Appointment\Command\Update\" />
-    <Folder Include="Features\Appointment\Queries\GetAppointmentByPatient\" />
-    <Folder Include="Features\Appointment\Queries\GetAppointmentByProcedure\" />
-    <Folder Include="Features\Appointment\Queries\GetAppointmentByDate\" />
-    <Folder Include="Features\Procedure\" />
-    <Folder Include="Features\Patient\" />
+    <Folder Include="Features\Appointments\Queries\GetAppointmentById\" />
+    <Folder Include="Features\Appointments\Command\Create\" />
+    <Folder Include="Features\Appointments\Command\Delete\" />
+    <Folder Include="Features\Appointments\Command\" />
+    <Folder Include="Features\Appointments\Command\SoftDelete\" />
+    <Folder Include="Features\Appointments\Command\Update\" />
+    <Folder Include="Features\Appointments\Queries\GetAppointmentByPatient\" />
+    <Folder Include="Features\Appointments\Queries\GetAppointmentByProcedure\" />
+    <Folder Include="Features\Appointments\Queries\GetAppointmentByDate\" />
+    <Folder Include="Features\Patients\" />
+    <Folder Include="Features\Procedures\Command\Delete\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="15.1.3" />
+    <PackageReference Include="FluentValidation" Version="12.0.0" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
     <PackageReference Include="MediatR" Version="13.0.0" />
   </ItemGroup>
 

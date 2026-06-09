@@ -43,18 +43,17 @@ namespace DentalManagementSystem.Identity.Services
 
             if (user == null)
             {
-                throw NotFoundException.Username(request.Username);
+                throw new BadRequestException("Invalid username or password.");
             }
 
             var passwordChecker = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
 
-            if (passwordChecker.Succeeded == false)
+            if (!passwordChecker.Succeeded)
             {
-                throw BadRequestException.InvalidPassword(request.Username);
+                throw new BadRequestException("Invalid username or password.");
             }
 
             var roles = await _userManager.GetRolesAsync(user);
-
             var userRole = roles.FirstOrDefault();
 
             JwtSecurityToken jwtSecurityToken = await JwtUtility.GenerateToken(user, _userManager, _jwtSettings);
@@ -75,36 +74,24 @@ namespace DentalManagementSystem.Identity.Services
 
         public async Task<LogoutResponse> Logout(string token)
         {
-
             if (string.IsNullOrWhiteSpace(token))
             {
                 throw new BadRequestException("Token is required to logout.");
             }
 
-            try
-            {
-                await _signInManager.SignOutAsync();
+           
+            await _signInManager.SignOutAsync();
 
-                var jwtToken = JwtUtility.VerifyAndReadToken(token);
-                var expiryDate = jwtToken.ValidTo;
+            var jwtToken = JwtUtility.VerifyAndReadToken(token);
+            var expiryDate = jwtToken.ValidTo;
 
-                JwtUtility.BlacklistToken(token, expiryDate, _userDbContext);
+            JwtUtility.BlacklistToken(token, expiryDate, _userDbContext);
 
-                return new LogoutResponse
-                {
-                    LogoutStatus = true,
-                    Message = "Successfully logged out."
-                };
-            }
-            catch (BadRequestException)
+            return new LogoutResponse
             {
-                
-                throw;
-            }
-            catch (Exception ex)
-            {
-                throw new BadRequestException("An unexpected error occurred while processing your logout request.");
-            }
+                Message = "Successfully logged out."
+            };
+            
         }
 
         public async Task<RegisterResponse> Register(RegisterRequest request)
@@ -127,25 +114,22 @@ namespace DentalManagementSystem.Identity.Services
 
             var result = await _userManager.CreateAsync(user, request.Password);
 
-            if (result.Succeeded)
+            if (!result.Succeeded)
             {
-                await _userManager.AddToRoleAsync(user, role.Name);
+                var validationResult = new FluentValidation.Results.ValidationResult(
+                    result.Errors.Select(e => new FluentValidation.Results.ValidationFailure(e.Code, e.Description))
+                );
 
-                return new RegisterResponse()
-                {
-                    CreationStatus = true,
-                    UserId = user.Id,
-                };
+                throw new ValidationException(validationResult);
             }
-            else
+
+            await _userManager.AddToRoleAsync(user, role.Name);
+
+            return new RegisterResponse()
             {
-                var errorMessages = result.Errors.Select(e => e.Description).ToList();
-                return new RegisterResponse()
-                {
-                    CreationStatus = false,
-                    Errors = errorMessages
-                };
-            }
+                CreationStatus = true,
+                UserId = user.Id,
+            };
         }
     }
 }

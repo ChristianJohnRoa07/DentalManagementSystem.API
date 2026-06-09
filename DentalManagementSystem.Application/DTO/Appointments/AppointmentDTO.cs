@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DentalManagementSystem.Application.DTO.Appointment
+namespace DentalManagementSystem.Application.DTO.Appointments
 {
     public class AppointmentDTO : BaseDTO
     {

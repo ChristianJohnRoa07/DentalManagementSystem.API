@@ -8,22 +8,18 @@ namespace DentalManagementSystem.Application.DTO.Responses
 {
     public class BaseApiResponse<T>
     {
-        public bool Success { get; set; }
-        public T? Data { get; }
-        public string? ErrorMessage { get; set; }
+        public bool Success { get; init; }
+        public T? Data { get; init; }
+        public string? ErrorMessage { get; init; }
+        public int StatusCode { get; init; }
 
-        public BaseApiResponse(T? data) 
-        { 
-            Success = true;
-            Data = data;
-        }
+        public BaseApiResponse() { }
 
-        public BaseApiResponse(bool success, T? data, string errorMessage)
+        public BaseApiResponse(T? data, int statusCode)
         {
-            Success = success;
-            ErrorMessage = errorMessage;
-            Data = default;
-            
+            Success = true;
+            StatusCode = statusCode;
+            Data = data;
         }
     }
 }

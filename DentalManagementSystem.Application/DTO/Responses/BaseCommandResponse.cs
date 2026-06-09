@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DentalManagementSystem.Application.DTO.Identity
+namespace DentalManagementSystem.Application.DTO.Responses
 {
-    public class LogoutResponse
+    public class BaseCommandResponse
     {
+        public Guid Id { get; set; }
         public string Message { get; set; }
     }
 }
