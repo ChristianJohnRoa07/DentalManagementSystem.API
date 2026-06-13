@@ -1,9 +1,11 @@
 using DentalManagementSystem.API.Middlewares;
+using DentalManagementSystem.API.Services;
 using DentalManagementSystem.Application;
+using DentalManagementSystem.Application.Contracts.Identity;
 using DentalManagementSystem.Identity;
 using DentalManagementSystem.Identity.DbContext;
-using DentalManagementSystem.Persistence;
 using DentalManagementSystem.Infrastructure;
+using DentalManagementSystem.Persistence;
 using DentalManagementSystem.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -15,6 +17,9 @@ builder.Services.ConfigurePersistenceServices(builder.Configuration);
 builder.Services.ConfigureIdentityServices(builder.Configuration);
 builder.Services.ConfigureApplicationServices();
 builder.Services.ConfigureInfrastructureServices(builder.Configuration);
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddControllers();
 
