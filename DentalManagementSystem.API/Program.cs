@@ -3,6 +3,7 @@ using DentalManagementSystem.Application;
 using DentalManagementSystem.Identity;
 using DentalManagementSystem.Identity.DbContext;
 using DentalManagementSystem.Persistence;
+using DentalManagementSystem.Infrastructure;
 using DentalManagementSystem.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigurePersistenceServices(builder.Configuration);
 builder.Services.ConfigureIdentityServices(builder.Configuration);
 builder.Services.ConfigureApplicationServices();
+builder.Services.ConfigureInfrastructureServices(builder.Configuration);
 
 builder.Services.AddControllers();
 
@@ -55,6 +57,8 @@ builder.Services.AddSwaggerGen(cfg =>
 });
 
 var app = builder.Build();
+
+app.UseStaticFiles();
 
 app.UseMiddleware<ExceptionMiddleware>();
 

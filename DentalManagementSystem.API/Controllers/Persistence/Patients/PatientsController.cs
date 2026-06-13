@@ -3,6 +3,8 @@ using DentalManagementSystem.Application.DTO.Procedures;
 using DentalManagementSystem.Application.DTO.Responses;
 using DentalManagementSystem.Application.Features.Patients.Command.Create;
 using DentalManagementSystem.Application.Features.Patients.Command.Update;
+using DentalManagementSystem.Application.Features.Patients.Command.Upload;
+using DentalManagementSystem.Application.Features.Patients.Queries.GetUploadedImagePerPatients;
 using DentalManagementSystem.Application.Features.Procedures.Command.Create;
 using DentalManagementSystem.Application.Features.Procedures.Command.Update;
 using MediatR;
@@ -43,6 +45,32 @@ namespace DentalManagementSystem.API.Controllers.Persistence.Patients
             var result = new BaseApiResponse<BaseCommandResponse>(response, StatusCodes.Status200OK);
 
             return Ok(result);
+        }
+
+        [HttpPost("{Id:guid}/upload-images")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UploadImages([FromRoute] Guid Id, [FromForm] IFormFileCollection files)
+        {
+            var command = new UploadPatientImageCommand
+            {
+                PatientId = Id,
+                Files = files,
+            };
+
+            var response = await _mediator.Send(command);
+
+            var result = new BaseApiResponse<BaseCommandResponse>(response, StatusCodes.Status200OK);
+            return Ok(result);
+        }
+
+        [HttpGet("{Id:guid}/images")]
+        public async Task<IActionResult> GetPatientImages([FromRoute] Guid Id)
+        {
+            // Dispatch query with parsed path identifier 
+            var query = new GetUploadedImagePerPatientQuery(Id);
+            var response = await _mediator.Send(query);
+
+            return Ok(response);
         }
     }
 }

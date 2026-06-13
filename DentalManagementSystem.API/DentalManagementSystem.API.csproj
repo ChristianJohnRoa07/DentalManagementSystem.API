@@ -22,9 +22,11 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Persistence\Appointments\" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Storage\DentalManagementSystem.Infrastructure.csproj" />
     <ProjectReference Include="..\DentalManagementSystem.Application\DentalManagementSystem.Application.csproj" />
     <ProjectReference Include="..\DentalManagementSystem.Identity\DentalManagementSystem.Identity.csproj" />
     <ProjectReference Include="..\DentalManagementSystem.Persistence\DentalManagementSystem.Persistence.csproj" />
