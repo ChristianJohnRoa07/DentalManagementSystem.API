@@ -3,6 +3,7 @@ using DentalManagementSystem.Application;
 using DentalManagementSystem.Identity;
 using DentalManagementSystem.Identity.DbContext;
 using DentalManagementSystem.Persistence;
+using DentalManagementSystem.Infrastructure;
 using DentalManagementSystem.Persistence.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -13,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigurePersistenceServices(builder.Configuration);
 builder.Services.ConfigureIdentityServices(builder.Configuration);
 builder.Services.ConfigureApplicationServices();
+builder.Services.ConfigureInfrastructureServices(builder.Configuration);
 
 builder.Services.AddControllers();
 
@@ -58,6 +60,12 @@ var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
 
+app.UseHttpsRedirection();
+
+app.UseStaticFiles();
+
+app.UseRouting();
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -68,9 +76,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
-
 app.UseAuthentication();
+app.UseMiddleware<BlacklistTokenMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

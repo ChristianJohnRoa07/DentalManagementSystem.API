@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using DentalManagementSystem.Application.DTO.Patients;
 using DentalManagementSystem.Application.DTO.Procedures;
 using DentalManagementSystem.Domain.Entities;
 using System;
@@ -14,10 +15,14 @@ namespace DentalManagementSystem.Application.Profiles
         public MappingProfiles() 
         {
             CreateMap<Procedure, ProcedureDto>();
+            CreateMap<PatientImage, PatientImageDto>();
+            CreateMap<Patient, PatientDto>();
 
             CreateMap<CreateProcedureDto, Procedure>().ReverseMap();
+            CreateMap<CreatePatientDto, Patient>().ReverseMap();
 
             CreateMap<UpdateProcedureDto, Procedure>().ReverseMap();
+            CreateMap<UpdatePatientDto, Patient>().ReverseMap();
         }
     }
 }

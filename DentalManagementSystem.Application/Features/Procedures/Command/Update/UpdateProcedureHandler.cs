@@ -39,7 +39,6 @@ namespace DentalManagementSystem.Application.Features.Procedures.Command.Update
             var existingProcedure = await _procedureRepository.GetById(updateProcedureRequest.Id);
             if (existingProcedure == null)
             {
-                
                 throw NotFoundException.ProcedureNotFound(updateProcedureRequest.Id);
             }
 

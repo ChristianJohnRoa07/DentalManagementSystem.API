@@ -11,20 +11,20 @@ using System.Threading.Tasks;
 
 namespace DentalManagementSystem.Persistence.Repositories
 {
-    public class PatientRepository : BaseRepository<Patient>, IPatientRepository
+    public class PatientImageRepository : BaseRepository<PatientImage>, IPatientImageRepository
     {
         private readonly DentalManagementSystemDbContext _dbContext;
 
-        public PatientRepository(DentalManagementSystemDbContext dbContext) : base(dbContext)
+        public PatientImageRepository(DentalManagementSystemDbContext dbContext) : base(dbContext)
         {
             _dbContext = dbContext;
         }
 
-        public async Task<Patient?> GetPatientWithImages(Guid id)
+        public async Task<List<PatientImage>> GetImagesByPatientId(Guid patientId)
         {
-            return await _dbContext.Patients
-            .Include(p => p.Images)
-            .FirstOrDefaultAsync(p => p.Id == id);
+            return await _dbContext.PatientImages
+                .Where(i => i.PatientId == patientId)
+                .ToListAsync();
         }
     }
 }

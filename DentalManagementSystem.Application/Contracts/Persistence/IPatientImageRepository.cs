@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace DentalManagementSystem.Application.Contracts.Persistence
 {
-    public interface IPatientRepository : IBaseRepository<Patient>
+    public interface IPatientImageRepository : IBaseRepository<PatientImage>
     {
-        Task<Patient?> GetPatientWithImages(Guid id);
+        Task<List<PatientImage>> GetImagesByPatientId(Guid patientId);
     }
 }

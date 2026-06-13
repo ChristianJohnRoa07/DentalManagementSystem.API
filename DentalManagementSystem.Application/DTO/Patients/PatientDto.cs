@@ -1,18 +1,19 @@
-﻿using DentalManagementSystem.Domain.Entities.Common;
+﻿using DentalManagementSystem.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DentalManagementSystem.Domain.Entities
+namespace DentalManagementSystem.Application.DTO.Patients
 {
-    public class Patient : BaseDomainEntity
+    public class PatientDto : IPatientDto
     {
+        public Guid Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string MobileNumber { get; set; }
-        public virtual ICollection<PatientImage> Images { get; set; } = new List<PatientImage>();
+        public List<PatientImageDto> Images { get; set; } = new List<PatientImageDto>();
     }
 }

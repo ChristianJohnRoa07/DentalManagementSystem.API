@@ -24,11 +24,10 @@ namespace DentalManagementSystem.Persistence
 
             services.AddScoped<IAppointmentRepository, AppointmentRepository>();
             services.AddScoped<IPatientRepository, PatientRepository>();
+            services.AddScoped<IPatientImageRepository, PatientImageRepository>();
             services.AddScoped<IProcedureRepository, ProcedureRepository>();
 
             return services;
         }
-
-
     }
 }
