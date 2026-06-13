@@ -1,4 +1,5 @@
-﻿using DentalManagementSystem.Domain.Entities;
+﻿using DentalManagementSystem.Application.Contracts.Identity;
+using DentalManagementSystem.Domain.Entities;
 using DentalManagementSystem.Domain.Entities.Common;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -11,8 +12,23 @@ namespace DentalManagementSystem.Persistence.DatabaseContext
 {
     public class DentalManagementSystemDbContext : DbContext
     {
-        public DentalManagementSystemDbContext(DbContextOptions<DentalManagementSystemDbContext> options) : base(options)
+        private readonly IUserService _userService;
+
+        public DentalManagementSystemDbContext(DbContextOptions<DentalManagementSystemDbContext> options, IUserService userService) : base(options)
         {
+            _userService = userService;
+        }
+
+        public DentalManagementSystemDbContext(DbContextOptions<DentalManagementSystemDbContext> options)
+        : base(options)
+        {
+            // Assign a fallback structure or an inline implementation so _userService is never null
+            _userService = new FallbackUserService();
+        }
+
+        private class FallbackUserService : IUserService
+        {
+            public Guid? UserId => Guid.Empty;
         }
 
         public DbSet<Appointment> Appointments { get; set; }
@@ -31,12 +47,12 @@ namespace DentalManagementSystem.Persistence.DatabaseContext
                 .Where(q => q.State == EntityState.Added || q.State == EntityState.Modified))
             {
                 entry.Entity.LastModifiedDate = DateTime.Now;
-                //entry.Entity.LastModifiedBy =
+                entry.Entity.LastModifiedBy = _userService.UserId;
 
                 if (entry.State == EntityState.Added)
                 {
                     entry.Entity.DateCreated = DateTime.Now;
-                    //entry.Entity.CreatedBy =
+                    entry.Entity.CreatedBy = _userService.UserId;
                 }
             }
 
