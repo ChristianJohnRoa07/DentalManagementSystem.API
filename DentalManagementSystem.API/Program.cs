@@ -90,19 +90,30 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-        logger.LogInformation("Applying Dental Management System migrations...");
+        logger.LogInformation("Checking Core Application Database shell...");
         var context = services.GetRequiredService<DentalManagementSystemDbContext>();
+
+        logger.LogInformation("Applying Dental Management System migrations...");
         await context.Database.MigrateAsync();
-
-        logger.LogInformation("Applying Identity Security database migrations...");
-        var identityDbContext = services.GetRequiredService<ApplicationUserDbContext>();
-        await identityDbContext.Database.MigrateAsync();
-
-        logger.LogInformation("Database initial migration routines completed successfully.");
+        logger.LogInformation("Dental Management System migrations applied successfully.");
     }
     catch (Exception ex)
     {
-        logger.LogCritical(ex, "An execution failure occurred while applying target database migrations.");
+        logger.LogCritical(ex, "Failure initializing Dental Management System database.");
+    }
+
+    try
+    {
+        logger.LogInformation("Checking Identity Security Database shell...");
+        var identityDbContext = services.GetRequiredService<ApplicationUserDbContext>();
+
+        logger.LogInformation("Applying Identity Security database migrations...");
+        await identityDbContext.Database.MigrateAsync();
+        logger.LogInformation("Identity Security database migrations completed successfully.");
+    }
+    catch (Exception ex)
+    {
+        logger.LogCritical(ex, "Failure initializing Identity Security database.");
     }
 }
 
