@@ -1,5 +1,6 @@
 ﻿using DentalManagementSystem.Application.DTO.Responses;
 using DentalManagementSystem.Identity.DbContext;
+using DentalManagementSystem.Identity.Services.Utilities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DentalManagementSystem.API.Middlewares
@@ -19,8 +20,10 @@ namespace DentalManagementSystem.API.Middlewares
                 var token = authHeader.Substring("Bearer ".Length).Trim();
 
                 // Check if the token exists in your new BlacklistedTokens table
+                var tokenHash = JwtUtility.ComputeSha256Hash(token);
+
                 var isBlacklisted = await dbContext.BlacklistedTokens
-                    .AnyAsync(t => t.Token == token);
+                    .AnyAsync(t => t.TokenHash == tokenHash);
 
                 if (isBlacklisted)
                 {

@@ -15,11 +15,16 @@ namespace DentalManagementSystem.Identity.Configurations
         {
             builder.HasKey(q => q.Id);
 
-            builder.HasIndex(q => q.Token)
-                   .IsUnique();
-
             builder.Property(q => q.Token)
-                   .IsRequired();
+               .IsRequired()
+               .HasColumnType("nvarchar(max)");
+
+            builder.Property(q => q.TokenHash)
+                   .IsRequired()
+                   .HasMaxLength(64);
+
+            builder.HasIndex(q => q.TokenHash)
+                   .IsUnique();
         }
     }
 }

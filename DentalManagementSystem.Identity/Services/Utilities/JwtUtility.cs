@@ -2,6 +2,7 @@
 using DentalManagementSystem.Application.Exceptions;
 using DentalManagementSystem.Identity.DbContext;
 using DentalManagementSystem.Identity.Models;
+using System.Security.Cryptography;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -37,6 +38,8 @@ namespace DentalManagementSystem.Identity.Services.Utilities
 
         public static async Task BlacklistToken(string token,DateTime expiryDate, ApplicationUserDbContext dbContext)
         {
+            var tokenHash = ComputeSha256Hash(token);
+
             var alreadyBlacklisted = await dbContext.BlacklistedTokens.AnyAsync(b => b.Token == token);
 
             if (!alreadyBlacklisted)
@@ -44,6 +47,7 @@ namespace DentalManagementSystem.Identity.Services.Utilities
                 var blacklistedToken = new BlacklistedToken
                 {
                     Token = token,
+                    TokenHash = tokenHash,
                     ExpiryDate = expiryDate
                 };
                 
@@ -80,6 +84,12 @@ namespace DentalManagementSystem.Identity.Services.Utilities
             );
 
             return jwtSecurityToken;
+        }
+
+        public static string ComputeSha256Hash(string rawData)
+        {
+            byte[] bytes = SHA256.HashData(Encoding.UTF8.GetBytes(rawData));
+            return Convert.ToHexString(bytes); // Returns a clean 64-character string
         }
     }
 }
