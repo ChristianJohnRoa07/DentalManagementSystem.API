@@ -10,6 +10,6 @@ namespace DentalManagementSystem.Application.Contracts.Persistence
 {
     public interface IPatientRepository : IBaseRepository<Patient>
     {
-        
+        Task<Patient?> GetPatientWithImages(Guid id);
     }
 }

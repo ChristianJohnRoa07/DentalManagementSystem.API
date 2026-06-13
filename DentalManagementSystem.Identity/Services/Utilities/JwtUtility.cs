@@ -35,7 +35,7 @@ namespace DentalManagementSystem.Identity.Services.Utilities
             return TokenHandler.ReadJwtToken(token);
         }
 
-        public async static void BlacklistToken(string token,DateTime expiryDate, ApplicationUserDbContext dbContext)
+        public static async Task BlacklistToken(string token,DateTime expiryDate, ApplicationUserDbContext dbContext)
         {
             var alreadyBlacklisted = await dbContext.BlacklistedTokens.AnyAsync(b => b.Token == token);
 

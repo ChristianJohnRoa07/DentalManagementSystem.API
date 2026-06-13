@@ -8,12 +8,14 @@ using DentalManagementSystem.Application.Features.Procedures.Command.Update;
 using DentalManagementSystem.Application.Features.Procedures.Queries.Get;
 using DentalManagementSystem.Application.Features.Procedures.Queries.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DentalManagementSystem.API.Controllers.Persistence.Procedures
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize]
     public class ProcedureController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -57,10 +59,10 @@ namespace DentalManagementSystem.API.Controllers.Persistence.Procedures
             return Ok(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateProcedureDto updateProcedureDto)
+        [HttpPost("change-status")]
+        public async Task<IActionResult> ChangeProcedureStatus([FromBody] ChangeActiveStatusDto changeApprovalStatusDto)
         {
-            var command = new UpdateProcedureCommand { updateProcedureDto = updateProcedureDto };
+            var command = new ChangeActiveStatusCommand { changeActiveStatusDto = changeApprovalStatusDto };
 
             var response = await _mediator.Send(command);
 
@@ -69,10 +71,10 @@ namespace DentalManagementSystem.API.Controllers.Persistence.Procedures
             return Ok(result);
         }
 
-        [HttpPost("change-status")]
-        public async Task<IActionResult> ChangeProcedureStatus([FromBody] ChangeActiveStatusDto changeApprovalStatusDto)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateProcedureDto updateProcedureDto)
         {
-            var command = new ChangeActiveStatusCommand { changeActiveStatusDto = changeApprovalStatusDto };
+            var command = new UpdateProcedureCommand { updateProcedureDto = updateProcedureDto };
 
             var response = await _mediator.Send(command);
 

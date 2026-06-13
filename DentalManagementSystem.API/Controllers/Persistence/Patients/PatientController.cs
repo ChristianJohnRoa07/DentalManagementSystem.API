@@ -4,23 +4,44 @@ using DentalManagementSystem.Application.DTO.Responses;
 using DentalManagementSystem.Application.Features.Patients.Command.Create;
 using DentalManagementSystem.Application.Features.Patients.Command.Update;
 using DentalManagementSystem.Application.Features.Patients.Command.Upload;
+using DentalManagementSystem.Application.Features.Patients.Queries.GetPatientDetailsById;
 using DentalManagementSystem.Application.Features.Patients.Queries.GetUploadedImagePerPatients;
 using DentalManagementSystem.Application.Features.Procedures.Command.Create;
 using DentalManagementSystem.Application.Features.Procedures.Command.Update;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DentalManagementSystem.API.Controllers.Persistence.Patients
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PatientsController : ControllerBase
+    [Authorize]
+    public class PatientController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public PatientsController(IMediator mediator)
+        public PatientController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet("{Id:guid}")]
+        public async Task<IActionResult> Get([FromRoute] Guid Id)
+        {
+            var query = new GetPatientDetailsByIdQuery { Id = Id };
+            var response = await _mediator.Send(query);
+
+            return Ok(response);
+        }
+
+        [HttpGet("images/{Id:guid}")]
+        public async Task<IActionResult> GetPatientImages([FromRoute] Guid Id)
+        {
+            var query = new GetUploadedImagePerPatientQuery { PatientId = Id };
+            var response = await _mediator.Send(query);
+
+            return Ok(response);
         }
 
         [HttpPost]
@@ -35,19 +56,7 @@ namespace DentalManagementSystem.API.Controllers.Persistence.Patients
             return Ok(result);
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdatePatientDto updatePatientDto)
-        {
-            var command = new UpdatePatientCommand { updatePatientDto = updatePatientDto };
-
-            var response = await _mediator.Send(command);
-
-            var result = new BaseApiResponse<BaseCommandResponse>(response, StatusCodes.Status200OK);
-
-            return Ok(result);
-        }
-
-        [HttpPost("{Id:guid}/upload-images")]
+        [HttpPost("upload-images/{Id:guid}")]
         [Consumes("multipart/form-data")]
         public async Task<IActionResult> UploadImages([FromRoute] Guid Id, [FromForm] IFormFileCollection files)
         {
@@ -63,14 +72,16 @@ namespace DentalManagementSystem.API.Controllers.Persistence.Patients
             return Ok(result);
         }
 
-        [HttpGet("{Id:guid}/images")]
-        public async Task<IActionResult> GetPatientImages([FromRoute] Guid Id)
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdatePatientDto updatePatientDto)
         {
-            // Dispatch query with parsed path identifier 
-            var query = new GetUploadedImagePerPatientQuery(Id);
-            var response = await _mediator.Send(query);
+            var command = new UpdatePatientCommand { updatePatientDto = updatePatientDto };
 
-            return Ok(response);
+            var response = await _mediator.Send(command);
+
+            var result = new BaseApiResponse<BaseCommandResponse>(response, StatusCodes.Status200OK);
+
+            return Ok(result);
         }
     }
 }

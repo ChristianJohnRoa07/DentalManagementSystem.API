@@ -13,9 +13,5 @@ namespace DentalManagementSystem.Application.Features.Patients.Queries.GetUpload
     {
         public Guid PatientId { get; set; }
 
-        public GetUploadedImagePerPatientQuery(Guid patientId)
-        {
-            PatientId = patientId;
-        }
     }
 }

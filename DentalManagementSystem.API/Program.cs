@@ -58,9 +58,13 @@ builder.Services.AddSwaggerGen(cfg =>
 
 var app = builder.Build();
 
+app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
-app.UseMiddleware<ExceptionMiddleware>();
+app.UseRouting();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -72,9 +76,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
-
 app.UseAuthentication();
+app.UseMiddleware<BlacklistTokenMiddleware>();
 app.UseAuthorization();
 
 app.MapControllers();

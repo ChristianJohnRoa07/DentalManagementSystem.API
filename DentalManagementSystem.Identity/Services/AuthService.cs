@@ -85,7 +85,7 @@ namespace DentalManagementSystem.Identity.Services
             var jwtToken = JwtUtility.VerifyAndReadToken(token);
             var expiryDate = jwtToken.ValidTo;
 
-            JwtUtility.BlacklistToken(token, expiryDate, _userDbContext);
+            await JwtUtility.BlacklistToken(token, expiryDate, _userDbContext);
 
             return new LogoutResponse
             {

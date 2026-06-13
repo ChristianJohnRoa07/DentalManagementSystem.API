@@ -16,7 +16,7 @@ namespace DentalManagementSystem.Application.Profiles
         {
             CreateMap<Procedure, ProcedureDto>();
             CreateMap<PatientImage, PatientImageDto>();
-            //CreateMap<Patient, Patie>();
+            CreateMap<Patient, PatientDto>();
 
             CreateMap<CreateProcedureDto, Procedure>().ReverseMap();
             CreateMap<CreatePatientDto, Patient>().ReverseMap();
